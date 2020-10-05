@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ClockService } from './clock.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ngrx';
+  constructor(private clockService: ClockService) {}
+
+  color: string;
+  counter: number;
+  
+  blocks = [
+    {'background-color': 'orange'},
+    {'background-color': 'green'},
+    {'background-color': 'lightblue'},
+    {'background-color': 'red'}
+  ];
+
+  ngOnInit() {
+    this.clockService.setInitValue(0);
+    this.clockService.start(1000);
+    this.clockService.clock.subscribe(x => {
+        this.counter = x % 10;
+    });
+  }
 }
