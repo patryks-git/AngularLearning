@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighlightDirective } from './app-highlight.directive';
 import { YPipe } from './y.pipe';
+import { BlockComponent } from './block/block.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HighlightDirective,
-    YPipe
+    YPipe,
+    BlockComponent
   ],
   imports: [
     BrowserModule,

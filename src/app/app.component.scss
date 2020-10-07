@@ -1,5 +1,6 @@
 .block {
-    height: 100px;
-    width: 100px;
     float: left;
+    transition-property: transform;
+    transition-duration: 1s;
+    transform: translateX(0);
 }
