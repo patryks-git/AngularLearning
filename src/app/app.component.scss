@@ -2,5 +2,24 @@
     float: left;
     transition-property: transform;
     transition-duration: 1s;
+    transition-timing-function: ease;
     transform: translateX(0);
+}
+
+#frame-left {
+    left: 0;
+    height: 6rem;
+    width: 4rem;
+    background: white;
+    position: fixed;
+    z-index: 1;
+}
+
+#frame-right {
+    left: 15rem;
+    height: 6rem;
+    width: 100%;
+    background: white;
+    position: fixed;
+    z-index: 1;
 }

@@ -1,3 +1,4 @@
-<ng-container *ngFor="let blockStyle of blocks">
-  <app-block [ngStyle]="blockStyle" class="block" [appHighlight]="0.5" ></app-block>
+<div id="frame-left"></div><div id="frame-right"></div>
+<ng-container *ngFor="let block of blocks">
+    <app-block [ngStyle]="block.style" class="block" [appHighlight]="0.5" (*appQueue)="block"></app-block>
 </ng-container>

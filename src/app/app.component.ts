@@ -1,14 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit, Optional } from '@angular/core';
 import { ClockService } from './clock.service';
 
-const BLOCKS = [
-  {background: 'orange', transform: '', transition: 'translateX 1s ease-in-out 1s'},
-  {background: 'green', transform: '', transition: 'translateX 1s ease-in-out 1s'},
-  {background: 'lightblue', transform: '', transition: 'translateX 1s ease-in-out 1s'},
-  {background: 'red', transform: '', transition: 'translateX 1s ease-in-out 1s'}
-];
-
-const block = `.block { height: 7rem; width: 7rem; }`;
+const block = `.block { height: 6rem; width: 6rem; }`;
 
 @Component({
   selector: 'app-root',
@@ -16,27 +9,46 @@ const block = `.block { height: 7rem; width: 7rem; }`;
   styleUrls: ['./app.component.scss'],
   styles: [block]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private clockService: ClockService) {}
+
 
   color: string;
   counter: number;
-  
+
   blocks = [
-    {background: 'orange', transform: ''},
-    {background: 'green', transform: ''},
-    {background: 'lightblue', transform: ''},
-    {background: 'red', transform: '' },
-    {background: 'cyan', transform: '' },
-    {background: 'pink', transform: '' }
+    new Block('orange'),
+    new Block('green'),
+    new Block('blue'),
+    new Block('red'),
+    new Block('cyan'),
+    new Block('pink')
   ];
 
   ngOnInit() {
     this.clockService.setInitValue(0);
-    this.clockService.start(1000);
-    this.clockService.clock.subscribe(x => {
-        this.counter = x % 15;
-        this.blocks.forEach(b => b.transform = `translateX(${this.counter}rem)`)
-    });
+    this.clockService.start(3000);
+    this.animate();
   }
+
+  animate() {
+    this.clockService.clock.subscribe(x => {
+      this.counter = x % 6 - 4;
+      this.blocks.forEach(b => {
+        b.translate = this.counter*6;
+      })
+  });
+  }
+}
+
+export class Block {
+  constructor(color: string) { this.translate = 0; this.color = color;}
+
+  set color(value: string) {this.style.background = value};
+  set translate(value: number) {this.style.transform = `translateX(${value}rem)`};
+  isVisible?: boolean = true;
+  style? = {
+    background: '',
+    transform: ''
+  };
 }
