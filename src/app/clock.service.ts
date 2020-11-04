@@ -1,38 +1,39 @@
-import { Injectable } from "@angular/core";
 import { BehaviorSubject, interval, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
+export interface ClockService {
+  clock: Observable<number>;
+  start(intervalInMs: number): void;
+  pause(): void;
+  stopPause(): void;
+  setInitValue(value: number): void;
+}
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ClockService {
-  constructor() {
-    this.clockSubject = new BehaviorSubject<number>(this._initValue);
-    this.clock = this.clockSubject.asObservable();
-  }
-  private clockSubject: BehaviorSubject<number>;
-  private _event: number = 1;
-  private _initValue: number = 0;
-  private _isEmitting: boolean = true;
+export function createClockService(): ClockService {
+  let _event: number = 1;
+  let _initValue: number = 0;
+  let _isEmitting: boolean = true;
+  let _clockSubject = new BehaviorSubject<number>(_initValue);
+
+  let clock: Observable<number> = _clockSubject.asObservable();
   
-  clock: Observable<number>
-
-  start(intervalInMs: number) {
+  let start = (intervalInMs: number) => {
     interval(intervalInMs).pipe(
-      tap(v => this._isEmitting ? this.clockSubject.next(this._event++) : null))
+      tap(v => _isEmitting ? _clockSubject.next(_event++) : null))
       .subscribe();
   }
 
-  pause() {
-    this._isEmitting = false;
+  let pause = () => {
+    _isEmitting = false;
   }
 
-  stopPause() {
-    this._isEmitting = true;
+  let stopPause = () => {
+    _isEmitting = true;
   }
 
-  setInitValue(value: number) {
-    this._initValue = value;
+  let setInitValue = (value: number) => {
+    _initValue = value;
   }
+
+  return { clock, start, pause, stopPause, setInitValue}
 }

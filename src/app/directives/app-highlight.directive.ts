@@ -1,19 +1,19 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { ClockService } from '../clock.service';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ClockService, createClockService } from '../clock.service';
 
 @Directive({
   selector: '[appHighlight]'
 })
 export class HighlightDirective {
 
-  constructor(private el: ElementRef, private service: ClockService) {}
+  constructor(private el: ElementRef) {}
 
-  @Input() defOpacity: number;
+  @Input('clockService') service: ClockService;
 
   @Input('appHighlight') opacity: number;
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(this.opacity || this.defOpacity || 1);
+    this.highlight(this.opacity || 1);
     this.service.pause();
   }
 
