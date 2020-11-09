@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HighlightDirective } from './directives/app-highlight.directive';
-import { MapToQueuePipe } from './map-to-queue.pipe';
+import { QueuePipe } from './queue.pipe';
 import { BlockComponent } from './block/block.component';
 import { QueueDirective } from './directives/queue.directive';
 
@@ -12,7 +12,7 @@ import { QueueDirective } from './directives/queue.directive';
   declarations: [
     AppComponent,
     HighlightDirective,
-    MapToQueuePipe,
+    QueuePipe,
     BlockComponent,
     QueueDirective
   ],
@@ -20,7 +20,7 @@ import { QueueDirective } from './directives/queue.directive';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [QueuePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

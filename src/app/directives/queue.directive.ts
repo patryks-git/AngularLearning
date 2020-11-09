@@ -1,22 +1,21 @@
 import { Directive, ViewContainerRef, TemplateRef ,Input, ComponentFactoryResolver, Renderer2, OnInit, AfterViewInit, ComponentFactory, OnDestroy } from '@angular/core';
-import { Block } from '../app.component';
+import { Block } from '../block.model';
 import { BlockComponent } from '../block/block.component';
-import { ClockService } from '../clock.service';
+import { QueuePipe } from '../queue.pipe';
 
 @Directive({
   selector: '[appQueue]'
 })
 export class QueueDirective implements OnInit, OnDestroy {
 
-  @Input() appQueue: boolean;
-  @Input() appQueueBlocks: Block[];
+  @Input('appQueue') blocks: Block[];
 
   constructor(
     private viewContainer: ViewContainerRef, 
     private factoryResolver: ComponentFactoryResolver,
     private template: TemplateRef<any>,
     private renderer: Renderer2, 
-    private clockService: ClockService
+    private queuePipe: QueuePipe
     ) {
       this.factory = this.factoryResolver.resolveComponentFactory(BlockComponent);
     }
@@ -33,17 +32,17 @@ export class QueueDirective implements OnInit, OnDestroy {
   }
 
   start() {
-    this.clockService.clock.subscribe(x => {
-      try {
-        this.append(this.appQueueBlocks[x % this.appQueueBlocks.length]);
+    this.queuePipe.transform(this.blocks, this.blocks.length - 2).subscribe(b => {
+      try{
+        this.append(b);
         this.detach(0);
       } catch(ex) { console.error(`Error directive: ${ex}`); }
-    });
+    })
   }
   
   generate() {
-    if(this.appQueueBlocks.length >= 3) {
-      this.appQueueBlocks.slice(0, this.appQueueBlocks.length - 2).forEach(block => this.append(block));
+    if(this.blocks.length >= 3) {
+      this.blocks.slice(1, this.blocks.length - 1).forEach(block => this.append(block));
     }
     else throw Error("Must be 3 blocks at least");
   }

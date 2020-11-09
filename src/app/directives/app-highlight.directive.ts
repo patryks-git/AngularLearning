@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { ClockService } from '../clock.service';
 
 @Directive({

@@ -1,9 +1,6 @@
-import {Component, OnInit, Optional, ViewChild } from '@angular/core';
-import { interval } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import {Component, OnInit } from '@angular/core';
+import { Block } from './block.model';
 import { ClockService } from './clock.service';
-
-
 
 @Component({
   selector: 'app-root',
@@ -22,40 +19,14 @@ export class AppComponent implements OnInit {
     ];
   }
 
-  counter: number;
   blocks: Block[];
 
   ngOnInit() {
     this.clockService.setInitValue(0);
     this.clockService.start(3000);
-    this.animate();
-  }
-
-  animate() {
-    this.clockService.clock.pipe(delay(50))
-    .subscribe(x => {
-      this.counter = x % 6 - 2;
-      this.blocks.forEach(b => {
-        b.translate = this.counter*6;
-      })
-  });
   }
 }
 
-export class Block {
-  constructor(color: string) { 
-    this.translate = 0; 
-    this.color = color;
-  }
-
-  set color(value: string) {this.style.background = value};
-  set translate(value: number) {this.style.transform = `translateX(${value}rem)`};
-  isVisible?: boolean = true;
-  style? = {
-    background: '',
-    transform: ''
-  };
-}
 
 export function hasValue(object: any): boolean {
   return object !== null || object !== undefined;
