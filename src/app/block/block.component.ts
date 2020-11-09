@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Block } from '../app.component';
+import { ClockService } from '../clock.service';
 
 const BLOCK = `.block { height: 6rem; width: 6rem; }`;
 
@@ -9,18 +10,8 @@ const BLOCK = `.block { height: 6rem; width: 6rem; }`;
   styleUrls: ['./block.component.scss'],
   styles: [BLOCK]
 })
-export class BlockComponent implements OnInit, BlockComponentBase {
+export class BlockComponent {
   constructor() { }
-
-  @Input() set block(value: Block) {
-    debugger;
-  }
-
-  ngOnInit(): void {
-  }
-
+  @Input() block: Block;
 }
 
-export interface BlockComponentBase {
-  block: Block;
-}

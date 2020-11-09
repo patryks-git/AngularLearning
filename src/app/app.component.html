@@ -1,8 +1,5 @@
-<div>
-    <!-- <div id="frame-left"></div><div id="frame-right"></div> -->
-    <ng-container *ngFor="let item of blocks">
-        <app-block [block]="item" [appHighlight]="0.5" [clockService]="clockService" [ngStyle]="item.style"></app-block>
-    </ng-container>
-</div>
+<ng-container *appQueue="true;blocks:blocks"></ng-container>
+
+<!-- <div id="frame-left"></div><div id="frame-right"></div> -->
 
 <div>{{ counter }}</div>

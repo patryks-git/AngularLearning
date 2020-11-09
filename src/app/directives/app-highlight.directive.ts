@@ -1,14 +1,12 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { ClockService, createClockService } from '../clock.service';
+import { ClockService } from '../clock.service';
 
 @Directive({
   selector: '[appHighlight]'
 })
 export class HighlightDirective {
 
-  constructor(private el: ElementRef) {}
-
-  @Input('clockService') service: ClockService;
+  constructor(private el: ElementRef, private service: ClockService) {}
 
   @Input('appHighlight') opacity: number;
 

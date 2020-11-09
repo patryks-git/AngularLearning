@@ -1,5 +1,7 @@
 import {Component, OnInit, Optional, ViewChild } from '@angular/core';
-import { ClockService, createClockService } from './clock.service';
+import { interval } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { ClockService } from './clock.service';
 
 
 
@@ -9,8 +11,7 @@ import { ClockService, createClockService } from './clock.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor() {
-    this.clockService = createClockService();
+  constructor(private clockService: ClockService) {
     this.blocks = [
       new Block('orange'),
       new Block('green'),
@@ -21,22 +22,22 @@ export class AppComponent implements OnInit {
     ];
   }
 
-  clockService: ClockService;
   counter: number;
   blocks: Block[];
 
   ngOnInit() {
     this.clockService.setInitValue(0);
-    this.clockService.start(1000);
+    this.clockService.start(3000);
     this.animate();
   }
 
   animate() {
-    this.clockService.clock.subscribe(x => {
-      this.counter = x % 10;
-      // this.blocks.forEach(b => {
-      //   b.translate = this.counter*6;
-      // })
+    this.clockService.clock.pipe(delay(50))
+    .subscribe(x => {
+      this.counter = x % 6 - 2;
+      this.blocks.forEach(b => {
+        b.translate = this.counter*6;
+      })
   });
   }
 }
@@ -54,4 +55,8 @@ export class Block {
     background: '',
     transform: ''
   };
+}
+
+export function hasValue(object: any): boolean {
+  return object !== null || object !== undefined;
 }
