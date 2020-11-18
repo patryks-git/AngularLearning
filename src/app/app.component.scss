@@ -1,17 +1,9 @@
-#frame-left {
-    left: 0;
-    height: 6rem;
-    width: 4rem;
-    background: white;
-    position: fixed;
-    z-index: 1;
+a {
+    color: gray;
+    text-decoration: none;
 }
 
-#frame-right {
-    left: 15rem;
-    height: 6rem;
-    width: 100%;
-    background: white;
-    position: fixed;
-    z-index: 1;
+a:hover {
+    color: red;
+    text-decoration: none;
 }

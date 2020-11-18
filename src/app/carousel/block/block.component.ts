@@ -1,7 +1,7 @@
 import { sanitizeIdentifier } from '@angular/compiler';
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { Block } from '../block.model';
+import { Block } from '../models/block.model';
 
 const BLOCK = `.block { height: 6rem; width: 6rem; }`;
 

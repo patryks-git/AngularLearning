@@ -1,26 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { CarouselModule } from './carousel/carousel.module';
 
 import { AppComponent } from './app.component';
-import { HighlightDirective } from './directives/app-highlight.directive';
-import { QueuePipe } from './queue.pipe';
-import { BlockComponent } from './block/block.component';
-import { QueueDirective } from './directives/queue.directive';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HighlightDirective,
-    QueuePipe,
-    BlockComponent,
-    QueueDirective
+    AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CarouselModule
   ],
-  providers: [QueuePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

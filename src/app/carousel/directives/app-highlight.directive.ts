@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { ClockService } from '../clock.service';
+import { ClockService } from '../services/clock.service';
 
 @Directive({
   selector: '[appHighlight]'
