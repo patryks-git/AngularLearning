@@ -5,6 +5,7 @@
 }
 
 .block {
+    position: absolute;
     float: left;
     transition-property: transform;
     transition-duration: 1s;

@@ -1,7 +1,10 @@
-import { Directive, ViewContainerRef, TemplateRef ,Input, ComponentFactoryResolver, Renderer2, OnInit, AfterViewInit, ComponentFactory, OnDestroy } from '@angular/core';
+import { Directive, ViewContainerRef ,Input, ComponentFactoryResolver, OnInit, ComponentFactory, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { BlockComponent } from '../block/block.component';
 import { Block } from '../models/block.model';
 import { QueuePipe } from '../pipes/queue.pipe';
+import { ClockService } from '../services/clock.service';
 
 
 @Directive({
@@ -14,18 +17,22 @@ export class QueueDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainer: ViewContainerRef, 
     private factoryResolver: ComponentFactoryResolver,
-    private template: TemplateRef<any>,
-    private renderer: Renderer2, 
-    private queuePipe: QueuePipe
+    private queuePipe: QueuePipe,
+    private clockService: ClockService
     ) {
       this.factory = this.factoryResolver.resolveComponentFactory(BlockComponent);
     }
 
   private factory: ComponentFactory<BlockComponent>;
   private blocksOnView: Block[];
+  private blockStream: Observable<Block>;
 
   ngOnInit(){
-    this.blocksOnView = this.appQueue.slice(1, this.appQueue.length - 1);
+    this.blocksOnView = this.appQueue.slice(1, this.appQueue.length);
+    this.blockStream = this.queuePipe.transform(this.appQueue, { 
+        countOfBlocksOnView: this.blocksOnView.length, 
+        translation: -6
+      });
     this.generate();
     this.start();
   }
@@ -35,8 +42,7 @@ export class QueueDirective implements OnInit, OnDestroy {
   }
 
   start() {
-    this.queuePipe.transform(this.appQueue, this.blocksOnView.length)
-    .subscribe(b => {
+    this.blockStream.pipe(delay(this.clockService.intervalInMs * 0.9)).subscribe(b => {
       try{
         this.append(b);
         this.detach(0);
