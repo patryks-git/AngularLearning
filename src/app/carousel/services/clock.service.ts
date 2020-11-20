@@ -2,17 +2,8 @@ import { BehaviorSubject, interval, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Injectable } from '@angular/core';
 
-
-export interface ClockService {
-  clock: Observable<number>;
-  start(intervalInMs: number): void;
-  pause(): void;
-  stopPause(): void;
-  setInitValue(value: number): void;
-}
-
 @Injectable({providedIn: 'root'})
-export class ClockService implements ClockService {
+export class ClockService {
 
   constructor() {
     this._event = 1;

@@ -42,7 +42,10 @@ export class QueuePipe implements PipeTransform {
 }
 
 export interface QueuePipeOpts {
-  countOfBlocksOnView?: number;
+  /** Number of Block's instances on carousel component view. */
+  countOfBlocksOnView: number;
+   /** Reverse animation to form right to left. Default: from left to right. */
   reverse?: boolean;
+   /** Translation of queue of Blocks to left or right in rem units*/
   translation?: number;
 }

@@ -1,5 +1,5 @@
 import { Directive, ViewContainerRef ,Input, ComponentFactoryResolver, OnInit, ComponentFactory, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { BlockComponent } from '../block/block.component';
 import { Block } from '../models/block.model';
@@ -23,6 +23,7 @@ export class QueueDirective implements OnInit, OnDestroy {
       this.factory = this.factoryResolver.resolveComponentFactory(BlockComponent);
     }
 
+  private subscriptions: Subscription[] = [];
   private factory: ComponentFactory<BlockComponent>;
   private blocksOnView: Block[];
   private blockStream: Observable<Block>;
@@ -38,16 +39,20 @@ export class QueueDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy();
+    this.viewContainer.clear();
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   start() {
-    this.blockStream.pipe(delay(this.clockService.intervalInMs * 0.9)).subscribe(b => {
-      try{
-        this.append(b);
-        this.detach(0);
-      } catch(ex) { console.error(`Error directive: ${ex}`); }
-    })
+    this.subscriptions.push(
+      this.blockStream.pipe(delay(this.clockService.intervalInMs * 0.9)).subscribe(b => {
+        try {
+          this.append(b);
+          this.detach(0);
+        }
+        catch (ex) { console.error(`Error directive: ${ex}`); }
+      })
+    );
   }
   
   generate() {
@@ -64,9 +69,5 @@ export class QueueDirective implements OnInit, OnDestroy {
 
   detach(index: number) {
     this.viewContainer.remove(index)
-  }
-
-  destroy() {
-    this.viewContainer.clear();
   }
 }
