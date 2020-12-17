@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CarouselModule } from './carousel/carousel.module';
 
 import { AppComponent } from './app.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     AppRoutingModule,
-    CarouselModule
+    CarouselModule,
+    EffectsModule.forRoot([])
   ],
   bootstrap: [ AppComponent ]
 })
