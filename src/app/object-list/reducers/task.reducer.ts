@@ -11,6 +11,8 @@ const initialState: Array<TaskItem> = [
 
 export function TaskReducer(state: Array<TaskItem> = initialState, action: TaskAction) {
     switch(action.type){
+        case TaskActionTypes.DELETE_ITEM:
+            return state.filter(i => i.id !== action.payload);
         case TaskActionTypes.ADD_ITEM:
             return [...state, action.payload]
         default:

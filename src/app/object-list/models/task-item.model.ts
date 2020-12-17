@@ -5,5 +5,7 @@ export interface TaskItem {
 }
 
 export enum TaskPriorityEnum {
-    Default = 0
+    Default = 0,
+    High = 1,
+    Low = 2,
 }
