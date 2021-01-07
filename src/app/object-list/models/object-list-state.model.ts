@@ -1,5 +1,5 @@
-import { TaskItem } from "./task-item.model";
-
-export interface ObjectListState {
-    readonly task: Array<TaskItem>;
+export interface ObjectListState<T> {
+    list: Array<T>;
+    loading: boolean;
+    error: Error;
 }
