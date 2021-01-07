@@ -1,9 +1,9 @@
+import { AppComponent } from './app.component';
+
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { CarouselModule } from './carousel/carousel.module';
 import { ObjectListModule } from './object-list/object-list.module';
-
-import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
