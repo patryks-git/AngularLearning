@@ -1,5 +1,5 @@
-export interface ObjectListState<T> {
-    list: Array<T>;
-    loading: boolean;
-    error: Error;
+import { TaskState } from "./task-state.model";
+
+export interface ObjectListState {
+    readonly task: TaskState;
 }

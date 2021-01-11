@@ -1,8 +1,8 @@
 <div id="wrapper">
-  
-    <div id="task-list">
+    <div *ngIf="!(error$ | async); else error" id="task-list">
+
       <div id="list">
-        <h2>Task List</h2>
+        <h2>Task List<div class="lds-ring" *ngIf="loading$ | async"><div></div><div></div><div></div><div></div></div></h2>
   
         <ul>
           <li *ngFor="let task of taskItems$ | async">
@@ -25,5 +25,9 @@
       </form>
       
     </div>
-    
+
   </div>
+
+  <ng-template #error>
+    <h2>{{ (error$ | async)?.message }}</h2>
+  </ng-template>

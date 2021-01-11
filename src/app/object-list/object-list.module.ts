@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TaskReducer } from './reducers/task.reducer';
+import { TaskEffects } from './effects/task.effects';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { TaskReducer } from './reducers/task.reducer';
     StoreModule.forRoot({
       task: TaskReducer
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([
+      TaskEffects
+    ]),
     CommonModule,
     HttpClientModule
   ]

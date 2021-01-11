@@ -1,17 +1,16 @@
 import { TaskAction, TaskActionTypes } from "../actions/task.action";
-import { ObjectListState } from "../models/object-list-state.model";
-import { TaskItem } from "../models/task-item.model";
+import { TaskState } from "../models/task-state.model";
 
-
-const initialState: ObjectListState<TaskItem> = 
+const initialState: TaskState = 
 {
     list: [],
     loading: false,
     error: undefined
 };
 
-export function TaskReducer(state: ObjectListState<TaskItem> = initialState, action: TaskAction) : ObjectListState<TaskItem> {
-    switch(action.type){
+export function TaskReducer(state: TaskState = initialState, action: TaskAction) {
+    let list = [];
+    switch(action.type) {
         //#region LoadItem
         case TaskActionTypes.LOAD_TASK:
             return {
@@ -39,9 +38,11 @@ export function TaskReducer(state: ObjectListState<TaskItem> = initialState, act
                 loading: true
             }
         case TaskActionTypes.ADD_ITEM_SUCCESS:
+            list = state.list.slice();
+            list.push(action.payload);
             return {
                 ...state, 
-                list: action.payload, 
+                list: list,
                 loading: false
             }
         case TaskActionTypes.ADD_ITEM_FAILURE:
@@ -58,6 +59,7 @@ export function TaskReducer(state: ObjectListState<TaskItem> = initialState, act
                 ...state, 
                 loading: true
             };
+
         case TaskActionTypes.DELETE_ITEM_SUCCESS:
             return { 
                 ...state, 
