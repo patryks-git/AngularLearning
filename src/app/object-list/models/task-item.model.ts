@@ -1,11 +1,11 @@
 export interface TaskItem {
     id: string;
     name: string;
-    priority: TaskPriorityEnum;
+    priority: number;
 }
 
-export enum TaskPriorityEnum {
-    Default = 0,
-    High = 1,
-    Low = 2,
-}
+export const TaskPriorityEnum = [
+    { name: "High", id: 0},
+    { name: "Medium", id: 1},
+    { name: "Low", id: 2}
+];

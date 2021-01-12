@@ -21,12 +21,8 @@ export class ObjectListComponent implements OnInit {
     error$: Observable<Error>;
     
     newTaskItem: TaskItem = {id: '', name: '', priority: 0};
-    get priorities() 
-    { 
-        return Object.keys(TaskPriorityEnum)
-            .filter(value => isNaN(Number(value)) === false)
-            .map(key => TaskPriorityEnum[key]);
-    }
+    priorities = TaskPriorityEnum;
+ 
 
     ngOnInit() {
         this.taskItems$ = this.store.select(store => store.task.list);

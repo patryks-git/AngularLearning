@@ -57,8 +57,14 @@
   .delete {
     position: absolute;
     right: 3%;
-    top: -12%;
+    top: 2%;
   }
+
+  .priority {
+    position: absolute;
+    right: 40px;
+  }
+
 
 /*LOADER*/
 .lds-ring {

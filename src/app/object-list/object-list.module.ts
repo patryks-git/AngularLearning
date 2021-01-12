@@ -8,10 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TaskReducer } from './reducers/task.reducer';
 import { TaskEffects } from './effects/task.effects';
+import { PriorityPipe } from './pipes/priority.pipe';
 
 @NgModule({
   declarations: [
-    ObjectListComponent
+    ObjectListComponent,
+    PriorityPipe
   ],
   imports: [
     FormsModule,

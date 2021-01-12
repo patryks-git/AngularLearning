@@ -6,34 +6,29 @@
       "priority": 0
     },
     {
-      "id": "3f611fa4-3228-4c93-ab6e-d63422f48257",
-      "name": "",
-      "priority": 0
-    },
-    {
-      "id": "471028ad-13dc-412c-9b18-82c17e87a55b",
-      "name": "dadfaed",
-      "priority": 0
-    },
-    {
       "id": "805f31f3-dccc-4b6a-93dc-cb65c7613148",
       "name": "555",
-      "priority": 0
-    },
-    {
-      "id": "87edf873-e233-4703-9a8f-e81116bda221",
-      "name": "fffff",
-      "priority": 0
-    },
-    {
-      "id": "0591259a-0405-4637-939e-89995d9c925e",
-      "name": "item 2",
       "priority": 0
     },
     {
       "id": "d7e5e244-389c-463e-8eee-3c070b6761e5",
       "name": "item 3",
       "priority": 0
+    },
+    {
+      "id": "8c793f96-1591-4dd4-9f75-4228ff1f3f44",
+      "name": "888",
+      "priority": 1
+    },
+    {
+      "id": "632da13f-a7e9-457f-800d-2948ea892bd6",
+      "name": "gdsfg",
+      "priority": 2
+    },
+    {
+      "id": "2f74a2e0-76fe-4287-8f0c-8e88949fdbd2",
+      "name": "task item 4",
+      "priority": 1
     }
   ]
 }

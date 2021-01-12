@@ -6,7 +6,7 @@
   
         <ul>
           <li *ngFor="let task of taskItems$ | async">
-            {{ task.name }}<button class="delete" (click)="deleteItem(task.id)">x</button>
+            {{ task.name }}<span class="priority">{{ task.priority | priority }}</span><button class="delete" (click)="deleteItem(task.id)">x</button>
           </li>
         </ul>
       </div>
@@ -18,8 +18,8 @@
         placeholder="Task"
         name="taskName"
         />
-        <select name="priority">
-          <option *ngFor="let priority of priorities">{{ priority }}</option>
+        <select name="priority" [(ngModel)]="newTaskItem.priority">
+          <option *ngFor="let priority of priorities" [ngValue]="priority.id">{{ priority.name }}</option>
         </select>
         <button type="submit">+</button>
       </form>
